@@ -17,6 +17,8 @@ Actually, it support:
 
 Packages are only make for recent Linux disto, Debian/RHEL (and on Windows/WSL) type.
 
+For package a SpringBoot project, you can use [SpringBoot Linux Packager](https://github.com/hdsdi3g/linux-springboot-packager).
+
 ## Needs
 
 For packaging: ``xz``, ``bash``, ``tar``, ``gzip``, ``curl``
@@ -82,4 +84,4 @@ Remember that manually installing applications no longer allows automatic and tr
 
 Free feel to add corrections and/or new features (it's really not rocket science).
 
-Actually, there are not "uninstall script" provided. This is something that could be done if needed (not to mention that it's impossible to do a clean _and_ safe de-installation with this basic installation method).
+Actually, there are no "uninstall script" provided. This is something that could be done if needed (not to mention that it's impossible to do a clean _and_ safe de-installation with this basic installation method).

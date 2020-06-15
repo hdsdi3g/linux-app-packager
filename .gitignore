@@ -2,6 +2,7 @@ redistributables/*
 !redistributables/.gitignore
 .extracted/*
 packages/*
+!packages/.gitignore
 scripts/makeself.sh
 scripts/makeself-header.sh
 

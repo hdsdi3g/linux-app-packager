@@ -7,7 +7,7 @@ if ! [ -x "$(command -v xz)" ]; then
 	exit 1
 fi
 
-cd $(dirname $0)/..
+cd "$(dirname "$0")"/..
 
 # Get/check makeself presence
 scripts/getmakeself.bash

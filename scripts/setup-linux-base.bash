@@ -6,7 +6,7 @@ umask 022
 ############
 # PRE-CHECKS
 ############
-if [ $(uname) != "Linux" ]; then
+if [ "$(uname)" != "Linux" ]; then
     echo "This setup script is intended for a Linux host"
     echo "No setup will be done here"
     exit 0;

@@ -2,14 +2,14 @@
 
 set -eu
 
-cd $(dirname $0)/..
+cd "$(dirname "$0")"/..
 
 # Get/check makeself presence
 scripts/getmakeself.bash
 
 echo "Start openjdk packaging...";
 
-ARCHIVE=$(find redistributables -name OpenJDK*.tar.gz | sort -r -V | head -1);
+ARCHIVE=$(find redistributables -name "OpenJDK*.tar.gz" | sort -r -V | head -1);
 
 # Check archive presence: no archive, no build.
 if [ ! -f "$ARCHIVE" ] ; then

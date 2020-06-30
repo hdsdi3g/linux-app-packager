@@ -2,14 +2,14 @@
 
 set -eu
 
-cd $(dirname $0)/..
+cd "$(dirname "$0")"/..
 
 # Get/check makeself presence
 scripts/getmakeself.bash
 
 echo "Start liquibase packaging...";
 
-ARCHIVE=$(find redistributables -name liquibase-*.tar.gz | sort -r -V | head -1);
+ARCHIVE=$(find redistributables -name "liquibase-*.tar.gz" | sort -r -V | head -1);
 
 # Check archive presence: no archive, no build.
 if [ ! -f "$ARCHIVE" ] ; then
@@ -36,7 +36,7 @@ chmod +x "$EXTRACTED_PATH/liquibase"
 
 # Try and extract JDBC Drivers
 # MySQL
-ARCHIVE_MYSQL=$(find redistributables -name mysql-connector-java-*.tar.gz | sort -r -V | head -1);
+ARCHIVE_MYSQL=$(find redistributables -name "mysql-connector-java-*.tar.gz" | sort -r -V | head -1);
 if [ -f "$ARCHIVE_MYSQL" ] ; then
 	echo "Extract MySQL JDBC Driver to Liquibase lib dir"
 	JDBC_EXTRACTED_PATH=".extracted/jdbc";
@@ -45,7 +45,7 @@ if [ -f "$ARCHIVE_MYSQL" ] ; then
 	fi
 	mkdir -p "$JDBC_EXTRACTED_PATH"
     tar xf "$ARCHIVE_MYSQL" -C "$JDBC_EXTRACTED_PATH" --strip-components=1
-	JAR_MYSQL=$(find "$JDBC_EXTRACTED_PATH" -name mysql-connector-java-*.jar | head -1);
+	JAR_MYSQL=$(find "$JDBC_EXTRACTED_PATH" -name "mysql-connector-java-*.jar" | head -1);
 	mv "$JAR_MYSQL" "$EXTRACTED_PATH/lib/"
 else
 	echo "Please put in $(realpath $EXTRACTED_PATH/lib/) any necessary JDBC Driver (Jar files) for your Liquibase needs";

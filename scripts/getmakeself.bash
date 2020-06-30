@@ -7,7 +7,7 @@ if ! [ -x "$(command -v curl)" ]; then
 	exit 1
 fi
 
-cd $(dirname $0)
+cd "$(dirname "$0")"
 
 if [ ! -f "makeself.sh" ] ; then
     echo "Can't found makeself script, download it now".

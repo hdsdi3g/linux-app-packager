@@ -2,7 +2,7 @@
 
 set -eu
 
-cd $(dirname $0)
+cd "$(dirname "$0")"
 
 scripts/ffmpeg.bash
 scripts/liquibase.bash

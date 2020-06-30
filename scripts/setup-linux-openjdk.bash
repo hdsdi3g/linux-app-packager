@@ -1,4 +1,5 @@
 #!/bin/bash
+# shellcheck disable=SC1091
 
 . release
 
@@ -38,7 +39,8 @@ if [ -d "$LIB_DIR" ]; then
 fi
 
 mkdir -p "$LIB_DIR"
-cp -R * "$LIB_DIR"
+cp -R ./* "$LIB_DIR"
+chmod -R u=rwX,go=rX,go-w "$LIB_DIR"
 
 if [ "$EUID" -eq 0 ]; then
    	##################

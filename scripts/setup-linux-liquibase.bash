@@ -21,10 +21,11 @@ if [ -d "$LIB_DIR" ]; then
 fi
 
 mkdir -p "$LIB_DIR"
-cp -R * "$LIB_DIR"
+cp -R ./* "$LIB_DIR"
 
-chmod -R 755 "$LIB_DIR/liquibase"
+chmod 755 "$LIB_DIR/liquibase"
 ln -s "$LIB_DIR/liquibase" "$BIN_DIR"
+chmod -R u=rwX,go=rX,go-w "$LIB_DIR"
 
 #######################
 # SETUP AUTO COMPLETION

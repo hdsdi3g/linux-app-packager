@@ -21,7 +21,12 @@ if [ -d "$LIB_DIR" ]; then
 fi
 
 mkdir -p "$LIB_DIR"
-cp -R * "$LIB_DIR"
+cp -R ./* "$LIB_DIR"
 
-chmod -R 755 "$LIB_DIR/ffmpeg"
+chmod 755 "$LIB_DIR/ffmpeg"
+chmod 755 "$LIB_DIR/ffprobe"
+
 ln -s "$LIB_DIR/ffmpeg" "$BIN_DIR"
+ln -s "$LIB_DIR/ffprobe" "$BIN_DIR"
+
+chmod -R u=rwX,go=rX,go-w "$LIB_DIR"

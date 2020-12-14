@@ -47,6 +47,9 @@ if [ -f "$PACKAGE_FILE" ] ; then
     rm -f "$PACKAGE_FILE";
 fi
 
-scripts/makeself.sh "$EXTRACTED_PATH" "$PACKAGE_FILE" "OpenJDK binaries" "./setup.bash"
+scripts/makeself.sh \
+    --tar-extra "--owner=root --group=root --no-xattrs --no-acls --no-selinux" \
+    --nooverwrite \
+    "$EXTRACTED_PATH" "$PACKAGE_FILE" "OpenJDK binaries" "./setup.bash"
 
 chmod +x "$PACKAGE_FILE"

@@ -15,8 +15,7 @@ read -n 1 -r -p "Press any key to continue"
 ##############
 # DEPLOY FILES
 ##############
-
-tools="jaotc jar jarsigner java javac javadoc javap jcmd jconsole jdb jdeprscan jdeps jhsdb jimage jinfo jjs jlink jmap jmod jps jrunscript jshell jstack jstat jstatd keytool pack200 rmic rmid rmiregistry serialver unpack200 jexec"
+tools="jar jarsigner java javac javadoc javap jcmd jconsole jdb jdeprscan jdeps jfr jhsdb jimage jinfo jlink jmap jmod jpackage jps jrunscript jshell jstack jstat jstatd keytool rmiregistry serialver"
 if [ "$EUID" -eq 0 ]; then
    	####################
 	# CLEAN ALTERNATIVES

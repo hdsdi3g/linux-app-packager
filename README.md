@@ -47,7 +47,7 @@ Put in ``redistributables`` directory:
 
 ### Get OpenJDK redistributables
 
-It can be get from [AdoptOpenJDK site](https://adoptopenjdk.net/releases.html) and select:
+It can be get from [Adoptium site](https://adoptium.net/) and select:
 
 - a **Version**
 - a **JVM type**

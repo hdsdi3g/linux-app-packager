@@ -3,7 +3,7 @@
 
 . release
 
-LIB_DIR="$ROOT/usr/lib/jvm/$IMPLEMENTOR-$JAVA_VERSION";
+LIB_DIR="$ROOT/usr/lib/jvm/${IMPLEMENTOR_VERSION,,}";
 
 ################
 # WELCOME ABOARD

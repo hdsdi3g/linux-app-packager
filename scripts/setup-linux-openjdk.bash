@@ -1,5 +1,5 @@
 #!/bin/bash
-# shellcheck disable=SC1091
+# shellcheck disable=SC1091,SC2045
 
 . release
 
@@ -15,21 +15,9 @@ read -n 1 -r -p "Press any key to continue"
 ##############
 # DEPLOY FILES
 ##############
-tools="jar jarsigner java javac javadoc javap jcmd jconsole jdb jdeprscan jdeps jfr jhsdb jimage jinfo jlink jmap jmod jpackage jps jrunscript jshell jstack jstat jstatd keytool rmiregistry serialver"
-if [ "$EUID" -eq 0 ]; then
-   	####################
-	# CLEAN ALTERNATIVES
-	####################
-	# Only by root
-	# Script inspired by AdopteOpenJDK Debian Archive prerm file
-	for tool in $tools ; do
-		for tool_path in "$LIB_DIR/bin/$tool" "$LIB_DIR/lib/$tool" ; do
-			if [ ! -e "$tool_path" ] ; then
-				continue
-			fi
-			update-alternatives --remove "$tool" "$tool_path"
-		done
-	done
+JAVA_HOME_EMULATE=$(dirname "$(dirname "$(realpath "$(which java)")")");
+if [ "$EUID" -eq 0 ] && [ -e "$JAVA_HOME_EMULATE/uninstall.bash" ]; then
+	"$JAVA_HOME_EMULATE/uninstall.bash"
 fi
 
 if [ -d "$LIB_DIR" ]; then
@@ -48,19 +36,19 @@ if [ "$EUID" -eq 0 ]; then
 	# Only by root
 	# Script inspired by AdopteOpenJDK Debian Archive postinst file
 	priority=10000
-	for tool in $tools ; do
-		for tool_path in "$LIB_DIR/bin/$tool" "$LIB_DIR/lib/$tool" ; do
-			if [ ! -e "$tool_path" ]; then
-				continue
-			fi
-			slave=""
-			tool_man_path="$LIB_DIR/man/man1/$tool.1"
-			if [ -e "$tool_man_path" ]; then
-				slave="--slave $ROOT/usr/share/man/man1/$tool.1 $tool.1 $tool_man_path"
-			fi
-			update-alternatives --install "$ROOT/usr/bin/$tool" "$tool" "$tool_path" "$priority" $slave
-		done
+	UNINSTALL_FILE="$LIB_DIR/uninstall.bash";
+	echo "#!/bin/bash" > "$UNINSTALL_FILE";
+	for tool in $(ls "$LIB_DIR/bin") ; do
+		slave=""
+		tool_path="$LIB_DIR/bin/$tool";
+		tool_man_path="$LIB_DIR/man/man1/$tool.1"
+		if [ -e "$tool_man_path" ]; then
+			slave="--slave $ROOT/usr/share/man/man1/$tool.1 $tool.1 $tool_man_path"
+		fi
+		update-alternatives --install "$ROOT/usr/bin/$tool" "$tool" "$tool_path" "$priority" "$slave"
+		echo "update-alternatives --remove \"$tool\" \"$tool_path\"" >> "$UNINSTALL_FILE";
 	done
+	chmod +x "$UNINSTALL_FILE"
 fi
 
 ########################
